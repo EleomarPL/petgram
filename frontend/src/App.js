@@ -10,11 +10,13 @@ import {BrowserRouter, Switch} from 'react-router-dom';
 import { AuthProvider } from './contexts/Auth';
 import PublicRoute from './components/router/PublicRouter';
 import PrivateRouter from './components/router/PrivateRouter';
+import Header from './components/Header';
 
 const App = () => {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <Header />
         <Switch>
           <PublicRoute exact path="/">
             <p>Inicio</p>
