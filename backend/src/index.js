@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const userRouter = require('./controllers/userRouter');
 const loginRouter = require('./controllers/loginRouter');
+const interactionRouter = require('./controllers/interactionRouter');
 
 const handleErrors = require('./middlewares/handleErrors');
 const notFound = require('./middlewares/notFound');
@@ -19,6 +20,7 @@ app.set('port', process.env.PORT || 4000);
 
 app.use('/api/user', userRouter);
 app.use('/api/login', loginRouter);
+app.use('/api/interaction', interactionRouter);
 
 app.use(handleErrors);
 app.use(notFound);
