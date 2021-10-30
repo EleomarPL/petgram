@@ -6,6 +6,7 @@ import '@fontsource/roboto';
 import './styles/index.css';
 
 import {BrowserRouter, Switch} from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
 
 import { AuthProvider } from './contexts/Auth';
 import PublicRoute from './components/router/PublicRouter';
@@ -37,6 +38,12 @@ const App = () => {
             <p>Favoritos</p>
           </PrivateRouter>
         </Switch>
+        <ToastContainer position="top-right"
+          autoClose={ 5000 } hideProgressBar={ false }
+          newestOnTop={ false } closeOnClick
+          rtl={ false } pauseOnFocusLoss
+          draggable={ false } pauseOnHover
+        />
       </BrowserRouter>
     </AuthProvider>
   );
