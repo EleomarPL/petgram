@@ -13,6 +13,7 @@ import PrivateRouter from './components/router/PrivateRouter';
 import Header from './components/Header';
 import Index from './pages/Index';
 import Register from './pages/Register';
+import Login from './pages/Login';
 
 const App = () => {
   return (
@@ -27,7 +28,7 @@ const App = () => {
             <Register />
           </PublicRoute>
           <PublicRoute exact path="/login">
-            <p>Login</p>
+            <Login />
           </PublicRoute>
           <PrivateRouter path="/home">
             <p>Home</p>
