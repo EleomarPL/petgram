@@ -9,7 +9,8 @@
     "frontend"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-front": "npm start --workspace=frontend",
+    "start-back": "npm run dev --workspace=backend"
   },
   "eslintConfig": {
     "extends": [
