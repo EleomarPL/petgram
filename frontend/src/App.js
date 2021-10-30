@@ -5,9 +5,13 @@ import '@fontsource/roboto';
 
 import './styles/index.css';
 
+import { AuthProvider } from './contexts/Auth';
+
 const App = () => {
   return (
-    <p>Hola mundo</p>
+    <AuthProvider>
+
+    </AuthProvider>
   );
 };
 
