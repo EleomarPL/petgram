@@ -22,7 +22,7 @@ const userSchema = new Schema({
     minlength: 10,
     maxlength: 80
   },
-  userName: {
+  username: {
     type: String,
     minlength: 6,
     maxlength: 45,
