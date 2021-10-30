@@ -11,6 +11,7 @@ import { AuthProvider } from './contexts/Auth';
 import PublicRoute from './components/router/PublicRouter';
 import PrivateRouter from './components/router/PrivateRouter';
 import Header from './components/Header';
+import Index from './pages/Index';
 
 const App = () => {
   return (
@@ -19,7 +20,7 @@ const App = () => {
         <Header />
         <Switch>
           <PublicRoute exact path="/">
-            <p>Inicio</p>
+            <Index />
           </PublicRoute>
           <PublicRoute exact path="/register">
             <p>Registrarse</p>

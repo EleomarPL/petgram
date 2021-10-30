@@ -1,0 +1,7 @@
+section{
+  padding: 15px 30px;
+}
+.active-header{
+  background-color: rgb(221, 221, 221);
+  border-radius: 10px;
+}
