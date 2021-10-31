@@ -4,4 +4,5 @@ section{
 .active-header{
   background-color: rgb(221, 221, 221);
   border-radius: 10px;
+  color: #0000ce !important;
 }

@@ -2,16 +2,63 @@ import { useContext } from 'react';
 import {NavLink} from 'react-router-dom';
 
 import AuthContext from '../contexts/Auth';
+import '../styles/header.css';
 
 const Header = () => {
   const {userData} = useContext(AuthContext);
   
   if (userData !== null)
-    return (
-      <p>Header</p>
-    );
+    return <PrivateHeader />;
   else
     return <PublicHeader />;
+};
+
+const PrivateHeader = () => {
+  return (
+    <nav className="navbar-user">
+      <ul className="d-flex justify-content-around align-items-center">
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/home"
+            activeClassName="active-header"
+          >
+            <span className="visually-hidden-focusable">Home</span>
+            <i className="bi bi-house-door-fill"></i>
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/favorites"
+            activeClassName="active-header"
+          >
+            <span className="visually-hidden-focusable">Favorites</span>
+            <i className="bi bi-heart-fill"></i>
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <div className="btn-group dropup">
+            <button type="button" className="dropdown-toggle"
+              data-bs-toggle="dropdown" aria-expanded="false"
+              id="dropdownMenuClickableInside" data-bs-auto-close="outside"
+              style={ {backgroundColor: 'transparent', border: 'none'} }
+            >
+              <i className="bi bi-person-circle" style={ {fontSize: '1.5rem'} }></i>
+              <span className="visually-hidden-focusable">User</span>
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+              <li className="d-flex justify-content-center mt-2">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                >
+                  Cerrar sesión
+                </button>
+              </li>
+              <li><hr className="dropdown-divider" /></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </nav>
+  );
 };
 
 const PublicHeader = () => {

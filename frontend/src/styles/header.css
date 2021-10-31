@@ -1,0 +1,21 @@
+.navbar-user{
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
+
+  background-color: rgb(224, 224, 224);
+}
+.navbar-user ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.navbar-user > ul > li {
+  margin: 0 1rem 0 0;
+  padding: 0;
+}
+.navbar-user a {
+  font-size: 1.5rem;
+  color: black;
+}
