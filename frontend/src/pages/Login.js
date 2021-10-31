@@ -17,9 +17,7 @@ const Login = () => {
       notifyWarning('Rellene todos los campos');
     } else {
       setIsLoading(true);
-      login({username, password}).then(() => {
-        setIsLoading(false);
-      });
+      login({username, password, setIsLoading});
     }
   };
 

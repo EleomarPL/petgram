@@ -6,9 +6,10 @@ import AuthContext from '../contexts/Auth';
 const useLogin = () => {
   const {setUserData} = useContext(AuthContext);
 
-  const login = async({ username, password }) => {
+  const login = async({ username, password, setIsLoading }) => {
     try {
       let {data} = await loginUser({ username, password });
+      setIsLoading(false);
 
       let dataUser = {
         name: data.name,
@@ -17,6 +18,7 @@ const useLogin = () => {
         email: data.email,
         userName: data.userName
       };
+      setUserData(dataUser);
       window.localStorage.setItem('datauser', JSON.stringify(dataUser));
       window.localStorage.setItem('session', JSON.stringify(data.token));
 
