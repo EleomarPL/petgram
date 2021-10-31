@@ -39,6 +39,12 @@ interactionRouter.get('/get-images/:searcher', userStractor, async(req, res, nex
     next(err);
   }
 });
+interactionRouter.get('/get-likes-post/:idPost', async(req, res) => {
+  const { idPost } = req.params;
+
+  const getPostLike = await Interaction.find({idPost});
+  res.send({likes: getPostLike.length});
+});
 interactionRouter.post('/create-interaction/:idPost', userStractor, async(req, res, next) => {
   const { idPost } = req.params;
   const {userId: idUser} = req;
