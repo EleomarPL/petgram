@@ -5,7 +5,7 @@ const Post = ({dataPost}) => {
     <article className="posts mb-3">
       <strong>{ dataPost.photographer }</strong>
       <div style={ {backgroundColor: '#00000033', borderRadius: '10px'} } className="pb-2">
-        <img src={ require('../../img/posts/cat.jpg').default }
+        <img src={ dataPost.srcImageSmall }
           style={ {
             width: '100%',
             height: '10rem',

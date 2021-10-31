@@ -56,7 +56,10 @@ interactionRouter.post('/create-interaction/:idPost', userStractor, async(req, r
     const lookSimilarInteractions = await Interaction.find({idUser, idPost});
     
     if (lookSimilarInteractions.length === 0) {
-      const newInteraction = new Interaction({ idPost, idUser, date: new Date() });
+      const newInteraction = new Interaction({
+        idPost, idUser, date: new Date(),
+        photographerId, photographerUrl, photographer, url, srcImageSmall, srcImageMedium
+      });
       const savedInteraction = await newInteraction.save();
 
       res.send(savedInteraction);

@@ -15,14 +15,32 @@ export const createInteraction = async({idPost, token, photographerId, photograp
   return response;
 };
 export const getPosts = async({ searcher, token }) => {
-  let response = await axios.get(`${BASE_API}/get-images/${searcher}'`, {}, token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  let response = await axios.get(`${BASE_API}/get-images/${searcher}'`, config);
   return response;
 };
 export const getFavoritesPosts = async({ token }) => {
-  let response = await axios.get(`${BASE_API}/get-favorites-posts`, {}, token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  let response = await axios.get(`${BASE_API}/get-favorites-posts`, config);
   return response;
 };
 export const deleteInteraction = async({idPost, token}) => {
-  let response = await axios.delete(`${BASE_API}/delete-interaction/${idPost}`, {}, token);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+
+  let response = await axios.delete(`${BASE_API}/delete-interaction/${idPost}`, config);
   return response;
 };
