@@ -17,6 +17,7 @@ import Index from './pages/Index';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Favorites from './pages/Favorites';
 
 const App = () => {
   return (
@@ -37,7 +38,7 @@ const App = () => {
             <Home />
           </PrivateRouter>
           <PrivateRouter exact path="/favorites">
-            <p>Favoritos</p>
+            <Favorites />
           </PrivateRouter>
         </Switch>
         <ToastContainer position="top-right"

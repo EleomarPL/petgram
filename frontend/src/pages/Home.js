@@ -1,8 +1,10 @@
 import {BrowserRouter, Switch} from 'react-router-dom';
+
 import PrivateRouter from '../components/router/PrivateRouter';
 import ManagmentSearcher from '../components/views/ManagmentSearcher';
-
 import NavigationPosts from '../components/views/NavigationPosts';
+
+import '../styles/home.css';
 
 const Home = () => {
   return (
