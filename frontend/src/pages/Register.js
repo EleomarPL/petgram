@@ -137,9 +137,9 @@ const Register = () => {
             </div>
           </div>
           <div className="mt-4">
-            <label htmlFor="user" className="visually-hidden-focusable">Email</label>
+            <label htmlFor="email" className="visually-hidden-focusable">Email</label>
             <input type="email"
-              id="user" className="form-control"
+              id="email" className="form-control"
               placeholder="Correo Electronico" required
             />
           </div>
