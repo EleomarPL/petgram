@@ -4,10 +4,22 @@ import {
   deleteInteraction as deleteInteractionAxios,
   getFavoritesPosts as getFavoritesPostsAxios,
   createInteraction as createInteractionAxios,
-  getPosts
+  getPosts,
+  getLikesFromPost
 } from '../services/api/interaction';
 
 const useInteraction = () => {
+  const getLikesByIdPost = async({idPost}) => {
+    try {
+      let {data} = await getLikesFromPost({idPost});
+      return data;
+    } catch ( err ) {
+      if (err.message === 'Network Error') {
+        notifyError('No encontramos una conexión a internet');
+      }
+      return null;
+    }
+  };
   const getFavoritesPosts = async() => {
     const token = JSON.parse(window.localStorage.getItem('session'));
 
@@ -73,7 +85,7 @@ const useInteraction = () => {
   };
 
   return {
-    deleteInteraction, getFavoritesPosts, createInteraction, getPostsBySearcher
+    deleteInteraction, getFavoritesPosts, createInteraction, getPostsBySearcher, getLikesByIdPost
   };
 };
 

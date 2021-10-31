@@ -40,6 +40,10 @@ export const getFavoritesPosts = async({ token }) => {
   let response = await axios.get(`${BASE_API}/get-favorites-posts`, config);
   return response;
 };
+export const getLikesFromPost = async({idPost}) => {
+  let response = await axios.get(`${BASE_API}/get-likes-post/${idPost}`);
+  return response;
+};
 export const deleteInteraction = async({idPost, token}) => {
   const config = {
     headers: {
