@@ -3,7 +3,8 @@ import { notifyError, notifySuccess, notifyWarning } from '../const/notification
 import {
   deleteInteraction as deleteInteractionAxios,
   getFavoritesPosts as getFavoritesPostsAxios,
-  createInteraction as createInteractionAxios
+  createInteraction as createInteractionAxios,
+  getPosts
 } from '../services/api/interaction';
 
 const useInteraction = () => {
@@ -12,6 +13,21 @@ const useInteraction = () => {
 
     try {
       let {data} = await getFavoritesPostsAxios({token});
+      return data;
+    } catch ( err ) {
+      if (err.response.data.error === 'Token missing or invalid') {
+        notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
+      } else if (err.message === 'Network Error') {
+        notifyError('No encontramos una conexión a internet');
+      }
+      return null;
+    }
+  };
+  const getPostsBySearcher = async({searcher}) => {
+    const token = JSON.parse(window.localStorage.getItem('session'));
+
+    try {
+      let {data} = await getPosts({token, searcher});
       return data;
     } catch ( err ) {
       if (err.response.data.error === 'Token missing or invalid') {
@@ -57,7 +73,7 @@ const useInteraction = () => {
   };
 
   return {
-    deleteInteraction, getFavoritesPosts, createInteraction
+    deleteInteraction, getFavoritesPosts, createInteraction, getPostsBySearcher
   };
 };
 
