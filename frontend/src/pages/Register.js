@@ -1,6 +1,10 @@
 import { useState } from 'react';
+import {useHistory} from 'react-router-dom';
+
+import SpinnerButtonLoading from '../components/common/SpinnerButtonLoading';
 import { notifyWarning } from '../const/notifications';
 import { isObjectValuesNull, isValidateEmail, validateLength } from '../services/validation/generalValidations';
+import useUser from '../hooks/useUser';
 
 import '../styles/register.css';
 
@@ -8,6 +12,9 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [messageStatusPassword, setMessageStatusPaswword] = useState({ color: '', text: '' });
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
+  const {createNewUser} = useUser();
 
   const setValidPassword = () => {
     setMessageStatusPaswword({
@@ -76,7 +83,17 @@ const Register = () => {
 
       if ( !isObjectValuesNull(dataNewUser) && validateLength(dataNewUser) ) {
         if ( isValidateEmail(dataNewUser.email.value)) {
-          console.log('register');
+          setIsLoading(true);
+          createNewUser({
+            name: dataNewUser.name.value, lastName: dataNewUser.lastName.value,
+            motherLastName: dataNewUser.motherLastName.value, email: dataNewUser.email.value,
+            username: dataNewUser.userName.value, password: dataNewUser.password.value
+          }).then((response) => {
+            setIsLoading(false);
+            if (response) {
+              history.push('/login');
+            }
+          });
         }
       }
     } else {
@@ -158,7 +175,12 @@ const Register = () => {
             { messageStatusPassword.text }
           </small>
           <div className="mt-4">
-            <button type="submit" className="btn btn-lg btn-primary d-block px-4 mx-auto button-media">
+            <button type="submit" className="btn btn-lg btn-primary d-block px-4 mx-auto button-media"
+              disabled={ isLoading }
+            >
+              { isLoading &&
+                <SpinnerButtonLoading />
+              }
               Registrarme
             </button>
           </div>
