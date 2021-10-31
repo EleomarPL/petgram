@@ -22,3 +22,7 @@ export const getFavoritesPosts = async({ token }) => {
   let response = await axios.get(`${BASE_API}/get-favorites-posts`, {}, token);
   return response;
 };
+export const deleteInteraction = async({idPost, token}) => {
+  let response = await axios.delete(`${BASE_API}/delete-interaction/${idPost}`, {}, token);
+  return response;
+};
