@@ -1,14 +1,29 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import useInteraction from '../../hooks/useInteraction';
+
 const Post = ({dataPost, aditionalEvt}) => {
   const [isLike, setIsLike] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const {createInteraction, deleteInteraction} = useInteraction();
 
   const handleInteraction = () => {
     setIsLoading(true);
-    setIsLike(!isLike);
-    setIsLoading(false);
+    if (!isLike) {
+      createInteraction({
+        idPost: dataPost.idPost, photographer: dataPost.photographer, photographerId: dataPost.photographerId, photographerUrl: dataPost.photographerUrl,
+        srcImageMedium: dataPost.srcImageMedium, srcImageSmall: dataPost.srcImageSmall, url: dataPost.url
+      }).then(() => {
+        setIsLike(!isLike);
+        setIsLoading(false);
+      });
+    } else {
+      deleteInteraction({idPost: dataPost.idPost}).then(() => {
+        setIsLike(!isLike);
+        setIsLoading(false);
+      });
+    }
 
     if (aditionalEvt)
       aditionalEvt();

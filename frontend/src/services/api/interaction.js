@@ -4,13 +4,19 @@ import { baseAPI } from '../../const/baseAPI';
 const BASE_API = `${baseAPI}/interaction`;
 
 export const createInteraction = async({idPost, token, photographerId, photographerUrl, photographer, url, srcImageSmall, srcImageMedium}) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  
   let response = await axios.post(
-    `${BASE_API}/create-interaction/${idPost}'`,
+    `${BASE_API}/create-interaction/${idPost}`,
     {
       photographerId, photographerUrl,
       photographer, url, srcImageSmall, srcImageMedium
     },
-    token
+    config
   );
   return response;
 };
