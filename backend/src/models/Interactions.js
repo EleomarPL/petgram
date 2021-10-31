@@ -7,6 +7,12 @@ const interactionSchedule = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
+  photographerId: Number,
+  photographerUrl: String,
+  photographer: String,
+  url: String,
+  srcImageSmall: String,
+  srcImageMedium: String,
   date: Date
 });
 

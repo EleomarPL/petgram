@@ -36,9 +36,12 @@ interactionRouter.get('/get-images/:searcher', userStractor, async(req, res, nex
 interactionRouter.post('/create-interaction/:idPost', userStractor, async(req, res, next) => {
   const { idPost } = req.params;
   const {userId: idUser} = req;
+  const {
+    photographerId, photographerUrl, photographer, url, srcImageSmall, srcImageMedium
+  } = req.body;
 
   try {
-    if (!(idPost, idUser)) {
+    if (!(idPost, idUser, photographerId, photographerUrl, photographer, url, srcImageSmall, srcImageMedium)) {
       return res.status(400).json({
         error: 'All parameters are required'
       });
