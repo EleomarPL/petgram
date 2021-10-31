@@ -1,17 +1,25 @@
 import { useState } from 'react';
+
+import useLogin from '../hooks/useLogin';
 import { notifyWarning } from '../const/notifications';
+import SpinnerButtonLoading from '../components/common/SpinnerButtonLoading';
 
 import '../styles/login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const {login} = useLogin();
 
   const handleLogin = () => {
     if (!(password && username)) {
       notifyWarning('Rellene todos los campos');
     } else {
-      console.log('login');
+      setIsLoading(true);
+      login({username, password}).then(() => {
+        setIsLoading(false);
+      });
     }
   };
 
@@ -48,7 +56,11 @@ const Login = () => {
           <div className="d-flex justify-content-center mb-2">
             <button type="button" className="btn btn-primary button-media"
               style={ {fontSize: '1.3rem'} } onClick={ handleLogin }
+              disabled={ isLoading }
             >
+              { isLoading &&
+                <SpinnerButtonLoading />
+              }
               Iniciar Sesión
             </button>
           </div>
