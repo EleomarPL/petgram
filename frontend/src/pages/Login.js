@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { notifyWarning } from '../const/notifications';
 
 import '../styles/login.css';
 
@@ -7,7 +8,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    console.log('login');
+    if (!(password && username)) {
+      notifyWarning('Rellene todos los campos');
+    } else {
+      console.log('login');
+    }
   };
 
   return (

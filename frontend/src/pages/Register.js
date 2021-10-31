@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { notifyWarning } from '../const/notifications';
+import { isNumberValue, isObjectValuesNull, isValidateEmail, validateLength } from '../services/validation/generalValidations';
 
 import '../styles/register.css';
 
@@ -32,7 +34,54 @@ const Register = () => {
 
   const handleRegister = (evt) => {
     evt.preventDefault();
-    
+    if (confirmPassword.trim() === password.trim()) {
+      let dataNewUser = {
+        name: {
+          name: 'Nombre',
+          minLength: 2,
+          maxLength: 45,
+          value: evt.target[0].value
+        },
+        lastName: {
+          name: 'Apellido paterno',
+          minLength: 2,
+          maxLength: 45,
+          value: evt.target[1].value
+        },
+        motherLastName: {
+          name: 'Apellido materno',
+          minLength: 2,
+          maxLength: 45,
+          value: evt.target[2].value
+        },
+        email: {
+          name: 'Correo electronico',
+          minLength: 10,
+          maxLength: 80,
+          value: evt.target[3].value
+        },
+        userName: {
+          name: 'Usuario',
+          minLength: 6,
+          maxLength: 45,
+          value: evt.target[4].value
+        },
+        password: {
+          name: 'Contraseña',
+          minLength: 6,
+          maxLength: 45,
+          value: password
+        }
+      };
+
+      if ( !isObjectValuesNull(dataNewUser) && validateLength(dataNewUser) ) {
+        if ( isValidateEmail(dataNewUser.email.value)) {
+          console.log('register');
+        }
+      }
+    } else {
+      notifyWarning('Las contraseñas no coinciden');
+    }
   };
   return (
     <section className="container-register">
