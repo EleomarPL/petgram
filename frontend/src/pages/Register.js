@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { notifyWarning } from '../const/notifications';
-import { isNumberValue, isObjectValuesNull, isValidateEmail, validateLength } from '../services/validation/generalValidations';
+import { isObjectValuesNull, isValidateEmail, validateLength } from '../services/validation/generalValidations';
 
 import '../styles/register.css';
 
