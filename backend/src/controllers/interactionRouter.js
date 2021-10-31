@@ -66,6 +66,16 @@ interactionRouter.post('/create-interaction/:idPost', userStractor, async(req, r
     next(err);
   }
 });
+interactionRouter.delete('/delete-interaction/:idPost', userStractor, async(req, res, next) => {
+  const { idPost } = req.params;
+  const {userId: idUser} = req;
+
+  Interaction.findOneAndRemove({idUser, idPost}).then(() => {
+    res.status(204).end();
+  }).catch(err => {
+    next(err);
+  });
+});
 
 
 module.exports = interactionRouter;
