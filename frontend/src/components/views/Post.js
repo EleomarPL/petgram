@@ -1,6 +1,19 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-const Post = ({dataPost}) => {
+const Post = ({dataPost, aditionalEvt}) => {
+  const [isLike, setIsLike] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInteraction = () => {
+    setIsLoading(true);
+    setIsLike(!isLike);
+    setIsLoading(false);
+
+    if (aditionalEvt)
+      aditionalEvt();
+  };
+
   return (
     <article className="posts mb-3">
       <strong>{ dataPost.photographer }</strong>
@@ -20,13 +33,19 @@ const Post = ({dataPost}) => {
           Ver Sitio Fotografo
         </a>
       </div>
-      <i className="bi bi-heart-fill" style={ {fontSize: '1.5rem'} }> 0 likes</i>
+      <button type="button"
+        style={ {backgroundColor: 'transparent', border: 'none'} }
+        onClick={ handleInteraction } disabled={ isLoading }
+      >
+        <i className={ `bi bi-heart${isLike ? '-fill' : ''}` } style={ {fontSize: '1.5rem'} }> 0 likes</i>
+      </button>
     </article>
   );
 };
 
 Post.propTypes = {
-  dataPost: PropTypes.object.isRequired
+  dataPost: PropTypes.object.isRequired,
+  aditionalEvt: PropTypes.func
 };
 
 export default Post;
