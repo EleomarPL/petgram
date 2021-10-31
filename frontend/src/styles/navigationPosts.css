@@ -14,6 +14,7 @@
 }
 .navigation-posts{
   display: flex;
+  margin: auto;
 }
 .container-card-pet{
   margin-right: 1rem;
