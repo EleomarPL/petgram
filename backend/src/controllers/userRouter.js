@@ -18,7 +18,7 @@ userRouter.post('/create-user', async(req, res, next) => {
     const newUser = new User({
       name, lastName, motherLastName,
       email, username, password: passwordHash,
-      type: 1, date: new Date()
+      date: new Date()
     });
     const savedUser = await newUser.save();
     res.send(savedUser);

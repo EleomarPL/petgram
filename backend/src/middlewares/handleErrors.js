@@ -7,7 +7,6 @@ const ERROR_HANDLERS = {
 };
 
 module.exports = (error, req, res, next) => {
-  console.log(error.name);
   const handler = ERROR_HANDLERS[error.name] || ERROR_HANDLERS.defaultError;
   handler(res, error);
 };
