@@ -4,6 +4,12 @@ const axios = require('axios');
 const userStractor = require('../middlewares/userStractor');
 const Interaction = require('../models/Interactions');
 
+interactionRouter.get('/get-favorites-posts', userStractor, async(req, res, next) => {
+  const {userId: idUser} = req;
+
+  const getFavoritesPosts = await Interaction.find({idUser});
+  res.send(getFavoritesPosts);
+});
 interactionRouter.get('/get-images/:searcher', userStractor, async(req, res, next) => {
   const {userId: idUser} = req;
   const {searcher} = req.params;
