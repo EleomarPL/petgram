@@ -16,6 +16,7 @@ import Header from './components/Header';
 import Index from './pages/Index';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Home from './pages/Home';
 
 const App = () => {
   return (
@@ -33,7 +34,7 @@ const App = () => {
             <Login />
           </PublicRoute>
           <PrivateRouter path="/home">
-            <p>Home</p>
+            <Home />
           </PrivateRouter>
           <PrivateRouter exact path="/favorites">
             <p>Favoritos</p>
