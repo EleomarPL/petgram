@@ -1,12 +1,21 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import useInteraction from '../../hooks/useInteraction';
 
 const Post = ({dataPost, aditionalEvt}) => {
   const [isLike, setIsLike] = useState(true);
+  const [totalLikes, setTotalLikes] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const {createInteraction, deleteInteraction} = useInteraction();
+  const {createInteraction, deleteInteraction, getLikesByIdPost} = useInteraction();
+
+  useEffect(() => {
+    getLikesByIdPost({idPost: dataPost.idPost}).then((res) => {
+      if (res) {
+        setTotalLikes(res.likes);
+      }
+    });
+  }, [isLike]);
 
   const handleInteraction = () => {
     setIsLoading(true);
@@ -52,7 +61,7 @@ const Post = ({dataPost, aditionalEvt}) => {
         style={ {backgroundColor: 'transparent', border: 'none'} }
         onClick={ handleInteraction } disabled={ isLoading }
       >
-        <i className={ `bi bi-heart${isLike ? '-fill' : ''}` } style={ {fontSize: '1.5rem'} }> 0 likes</i>
+        <i className={ `bi bi-heart${isLike ? '-fill' : ''}` } style={ {fontSize: '1.5rem'} }> { totalLikes } likes</i>
       </button>
     </article>
   );
