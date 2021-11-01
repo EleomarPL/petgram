@@ -27,7 +27,7 @@ export const getPosts = async({ searcher, token }) => {
     }
   };
 
-  let response = await axios.get(`${BASE_API}/get-images/${searcher}'`, config);
+  let response = await axios.get(`${BASE_API}/get-images/${searcher}`, config);
   return response;
 };
 export const getFavoritesPosts = async({ token }) => {

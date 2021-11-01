@@ -42,9 +42,7 @@ const useInteraction = () => {
       let {data} = await getPosts({token, searcher});
       return data;
     } catch ( err ) {
-      if (err.response.data.error === 'Token missing or invalid') {
-        notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
-      } else if (err.message === 'Network Error') {
+      if (err.message === 'Network Error') {
         notifyError('No encontramos una conexión a internet');
       }
       return null;

@@ -29,7 +29,13 @@ interactionRouter.get('/get-images/:searcher', userStractor, async(req, res, nex
       let index = getInteractions.findIndex(interacion => interacion.id === idPost);
       return {
         ...post,
-        like: index !== -1
+        like: index !== -1,
+        idPost: post.id,
+        photographerId: post.photographer_id,
+        photographerUrl: post.photographer_url,
+        srcImageSmall: post.src.small,
+        srcImageMedium: post.src.medium,
+        date: Date
       };
       
     });
