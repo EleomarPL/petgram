@@ -31,6 +31,7 @@ const ManagmentSearcher = () => {
       { posts &&
         posts.map(post =>
           <Post
+            initialValueLike={ post.like }
             key={ post.id }
             dataPost={ post }
           />

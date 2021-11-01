@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import useInteraction from '../../hooks/useInteraction';
 
-const Post = ({dataPost, aditionalEvt}) => {
-  const [isLike, setIsLike] = useState(true);
+const Post = ({dataPost, aditionalEvt, initialValueLike = true}) => {
+  const [isLike, setIsLike] = useState(initialValueLike);
   const [totalLikes, setTotalLikes] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const {createInteraction, deleteInteraction, getLikesByIdPost} = useInteraction();
@@ -69,6 +69,7 @@ const Post = ({dataPost, aditionalEvt}) => {
 
 Post.propTypes = {
   dataPost: PropTypes.object.isRequired,
+  initialValueLike: PropTypes.bool,
   aditionalEvt: PropTypes.func
 };
 

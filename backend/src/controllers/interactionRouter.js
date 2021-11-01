@@ -26,7 +26,7 @@ interactionRouter.get('/get-images/:searcher', userStractor, async(req, res, nex
     const getImagesFromExternalAPI = await axios.get(`https://api.pexels.com/v1/search?query=${searcher}`, config);
     const dataToSend = getImagesFromExternalAPI.data.photos.map(post => {
       let idPost = post.id;
-      let index = getInteractions.findIndex(interacion => interacion.id === idPost);
+      let index = getInteractions.findIndex(interacion => interacion.idPost === idPost);
       return {
         ...post,
         like: index !== -1,
