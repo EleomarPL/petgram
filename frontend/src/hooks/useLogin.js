@@ -24,6 +24,7 @@ const useLogin = () => {
 
       return dataUser;
     } catch ( err ) {
+      setIsLoading(false);
       if (err.message === 'Network Error')
         notifyError('No encontramos una conexión a internet');
       else if (err.response.data.error === 'Invalid user or password')
