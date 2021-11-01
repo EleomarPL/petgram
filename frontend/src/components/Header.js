@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import {NavLink} from 'react-router-dom';
 
 import AuthContext from '../contexts/Auth';
+import useLogin from '../hooks/useLogin';
+
 import '../styles/header.css';
 
 const Header = () => {
@@ -14,6 +16,8 @@ const Header = () => {
 };
 
 const PrivateHeader = () => {
+  const {logout} = useLogin();
+
   return (
     <nav className="navbar-user">
       <ul className="d-flex justify-content-around align-items-center">
@@ -48,6 +52,7 @@ const PrivateHeader = () => {
                 <button
                   type="button"
                   className="btn btn-secondary"
+                  onClick={ logout }
                 >
                   Cerrar sesión
                 </button>
