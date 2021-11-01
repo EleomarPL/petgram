@@ -12,7 +12,8 @@
     "node": "16.x"
   },
   "scripts": {
-    "start": "npm start --workspace=backend",
+    "start": "npm start --workspace=frontend",
+    "build": "npm run build --workspace=frontend",
     "start-front": "npm start --workspace=frontend",
     "start-back": "npm run dev --workspace=backend"
   },
