@@ -40,6 +40,13 @@ const ManagmentSearcher = () => {
       { isLoading &&
         <SpinnerLoading />
       }
+      { !isLoading && posts.length === 0 &&
+        <p className="d-flex justify-content-center fw-bold"
+          style={ {fontSize: '1.5rem'} }
+        >
+          No hay Publicaciones
+        </p>
+      }
     </div>
   );
 };

@@ -29,6 +29,13 @@ const Favorites = () => {
       { isLoading &&
         <SpinnerLoading />
       }
+      { !isLoading && favorites.length === 0 &&
+        <p className="d-flex justify-content-center fw-bold"
+          style={ {fontSize: '1.5rem'} }
+        >
+          No hay Favoritos
+        </p>
+      }
     </section>
   );
 };
