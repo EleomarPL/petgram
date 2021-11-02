@@ -8,12 +8,8 @@
     "backend",
     "frontend"
   ],
-  "engines": {
-    "node": "16.x"
-  },
   "scripts": {
-    "start": "npm start --workspace=frontend",
-    "build": "npm run build --workspace=frontend",
+    "start": "npm start --workspace=backend",
     "start-front": "npm start --workspace=frontend",
     "start-back": "npm run dev --workspace=backend"
   },
