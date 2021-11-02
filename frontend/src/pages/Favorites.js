@@ -12,7 +12,9 @@ const Favorites = () => {
     setIsLoading(true);
     getFavoritesPosts().then((res) => {
       setIsLoading(false);
-      setFavorites(res);
+      console.log(res);
+      if (res)
+        setFavorites(res);
     });
   }, []);
 
