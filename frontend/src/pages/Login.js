@@ -12,7 +12,9 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const {login} = useLogin();
 
-  const handleLogin = () => {
+  const handleLogin = (evt) => {
+    evt.preventDefault();
+
     if (!(password && username)) {
       notifyWarning('Rellene todos los campos');
     } else {
@@ -37,31 +39,33 @@ const Login = () => {
           </picture>
         </div>
         <div className="container-inputs-login">
-          <div className="input-group flex-column mb-2 mt-2">
-            <label htmlFor="user" id="addon-wrapping">Usuario</label>
-            <input type="text" className="form-control w-100"
-              placeholder="Username: username" id="user"
-              value={ username } onChange={ (evt) => setUsername(evt.target.value) }
-            />
-          </div>
-          <div className="input-group flex-column mb-2">
-            <label htmlFor="password" id="addon-wrapping">Contraseña</label>
-            <input type="password" className="form-control w-100"
-              placeholder="Password: password" id="password"
-              value={ password } onChange={ (evt) => setPassword(evt.target.value) }
-            />
-          </div>
-          <div className="d-flex justify-content-center mb-2">
-            <button type="button" className="btn btn-primary button-media"
-              style={ {fontSize: '1.3rem'} } onClick={ handleLogin }
-              disabled={ isLoading }
-            >
-              { isLoading &&
-                <SpinnerButtonLoading />
-              }
-              Iniciar Sesión
-            </button>
-          </div>
+          <form onSubmit={ handleLogin }>
+            <div className="input-group flex-column mb-2 mt-2">
+              <label htmlFor="user" id="addon-wrapping">Usuario</label>
+              <input type="text" className="form-control w-100"
+                placeholder="Usuario" id="user"
+                value={ username } onChange={ (evt) => setUsername(evt.target.value) }
+              />
+            </div>
+            <div className="input-group flex-column mb-2">
+              <label htmlFor="password" id="addon-wrapping">Contraseña</label>
+              <input type="password" className="form-control w-100"
+                placeholder="Contraseña" id="password"
+                value={ password } onChange={ (evt) => setPassword(evt.target.value) }
+              />
+            </div>
+            <div className="d-flex justify-content-center mb-2">
+              <button type="submit" className="btn btn-primary button-media"
+                style={ {fontSize: '1.3rem'} }
+                disabled={ isLoading }
+              >
+                { isLoading &&
+                  <SpinnerButtonLoading />
+                }
+                Iniciar Sesión
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </section>
