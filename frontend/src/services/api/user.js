@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseAPI } from '../../const/baseAPI';
+import { BASE_API as baseAPI } from './BASE_API';
 
 const BASE_API = `${baseAPI}/user`;
 
