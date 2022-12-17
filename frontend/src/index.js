@@ -1,7 +1,11 @@
-import {render} from 'react-dom';
+import { render } from 'react-dom';
+import { NextUIProvider } from '@nextui-org/react';
+
 import App from './App';
 
 render(
-  <App />,
+  <NextUIProvider>
+    <App />
+  </NextUIProvider>,
   document.getElementById('root')
 );
