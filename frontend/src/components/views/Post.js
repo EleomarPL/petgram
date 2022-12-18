@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { Card, Col, Row, Button, Text, Avatar, Link } from '@nextui-org/react';
 
 import useInteraction from '../../hooks/useInteraction';
 
@@ -37,33 +38,73 @@ const Post = ({dataPost, aditionalEvt, initialValueLike = true}) => {
     if (aditionalEvt)
       aditionalEvt();
   };
-
   return (
-    <article className="posts mb-3">
-      <strong>{ dataPost.photographer }</strong>
-      <div style={ {backgroundColor: '#00000033', borderRadius: '10px'} } className="pb-2">
-        <img src={ dataPost.srcImageSmall }
-          style={ {
-            width: '100%',
-            height: '10rem',
-            objectFit: 'cover',
-            borderRadius: '10px'
-          } }
+    <Card css={ { w: '100%', h: '400px' } }>
+      <Card.Header css={ { position: 'absolute', zIndex: 1, top: 5 } }>
+        <Col>
+          <Text size={ 12 } weight="bold"
+            transform="uppercase" color="#9E9E9E">
+            { dataPost.photographer }
+          </Text>
+        </Col>
+      </Card.Header>
+      <Card.Body css={ { p: 0 } }>
+        <Card.Image
+          src={ dataPost?.src?.medium || dataPost?.srcImageMedium }
+          objectFit="cover"
+          width="100%"
+          height="100%"
+          alt="Relaxing app background"
         />
-        <a href={ dataPost.photographerUrl }
-          target="_blank"
-          rel="noreferrer"
-        >
-          Ver Sitio Fotografo
-        </a>
-      </div>
-      <button type="button"
-        style={ {backgroundColor: 'transparent', border: 'none'} }
-        onClick={ handleInteraction } disabled={ isLoading }
+      </Card.Body>
+      <Card.Footer
+        isBlurred
+        css={ {
+          position: 'absolute',
+          bgBlur: '#0f111466',
+          borderTop: '$borderWeights$light solid $gray800',
+          bottom: 0,
+          zIndex: 1
+        } }
       >
-        <i className={ `bi bi-heart${isLike ? '-fill' : ''}` } style={ {fontSize: '1.5rem'} }> { totalLikes } likes</i>
-      </button>
-    </article>
+        <Row>
+          <Col>
+            <Row>
+              <Col span={ 6 } css={ {margin: 'auto 0'} }>
+                <Avatar
+                  color="gradient"
+                  textColor="white"
+                  height={ 30 }
+                  width={ 30 }
+                />
+              </Col>
+              <Col>
+                <Link color="#d1d1d1" size={ 8 }
+                  href={ dataPost.photographerUrl }
+                  isExternal
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Sitio del Fotografo
+                </Link>
+              </Col>
+            </Row>
+          </Col>
+          <Col>
+            <Row justify="flex-end">
+              <Button color="error" auto
+                shadow
+                onPress={ handleInteraction } disabled={ isLoading }
+              >
+                <i className={ `bi bi-heart${isLike ? '-fill' : ''}` }>
+                  { totalLikes } likes
+                </i>
+              </Button>
+            </Row>
+          </Col>
+        </Row>
+      </Card.Footer>
+    </Card>
   );
 };
 
