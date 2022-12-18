@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Button, Container, Grid, Input, Text } from '@nextui-org/react';
+import styled from 'styled-components';
 
 import useLogin from '../hooks/useLogin';
 import { notifyWarning } from '../const/notifications';
@@ -24,52 +26,72 @@ const Login = () => {
   };
 
   return (
-    <section>
-      <h1 className="text-center">Iniciar Sesión</h1>
-      <div className="container-login">
-        <div className="img-left">
-          <picture>
-            <source srcSet={ require('../img/login.webp').default } />
-            <img src={ require('../img/login.png').default }
-              style={ {
-                width: '15rem',
-                objectFit: 'contain'
-              } }
+    <Container sm>
+      <Text
+        h1
+        size={ 39 }
+        css={ {
+          textGradient: '45deg, $yellow600 -20%, $red600 100%',
+          textAlign: 'center'
+        } }
+        weight="bold"
+      >
+        Iniciar sesión
+      </Text>
+      <Grid.Container
+        justify="space-evenly"
+        css={ {margin: '1rem 0'} }
+      >
+        <Grid css={ { margin: 'auto' } }>
+          <div>
+            <picture>
+              <source srcSet={ require('../img/login.webp').default } />
+              <img src={ require('../img/login.png').default }
+                style={ {
+                  width: '15rem',
+                  objectFit: 'contain'
+                } }
+              />
+            </picture>
+          </div>
+        </Grid>
+        <ContainerForm xs>
+          <form onSubmit={ handleLogin }
+            style={ {width: '100%'} }
+          >
+            <Input label="Usuario" placeholder="Ingresa tu usuario"
+              bordered fullWidth
+              required value={ username }
+              onChange={ e => setUsername(e.target.value) }
             />
-          </picture>
-        </div>
-        <div className="container-inputs-login">
-          <form onSubmit={ handleLogin }>
-            <div className="input-group flex-column mb-2 mt-2">
-              <label htmlFor="user" id="addon-wrapping">Usuario</label>
-              <input type="text" className="form-control w-100"
-                placeholder="Usuario" id="user"
-                value={ username } onChange={ (evt) => setUsername(evt.target.value) }
-              />
-            </div>
-            <div className="input-group flex-column mb-2">
-              <label htmlFor="password" id="addon-wrapping">Contraseña</label>
-              <input type="password" className="form-control w-100"
-                placeholder="Contraseña" id="password"
-                value={ password } onChange={ (evt) => setPassword(evt.target.value) }
-              />
-            </div>
-            <div className="d-flex justify-content-center mb-2">
-              <button type="submit" className="btn btn-primary button-media"
-                style={ {fontSize: '1.3rem'} }
-                disabled={ isLoading }
-              >
-                { isLoading &&
-                  <SpinnerButtonLoading />
-                }
-                Iniciar Sesión
-              </button>
-            </div>
+            <Input label="Contraseña" placeholder="Ingresa tu contraseña"
+              bordered fullWidth
+              required type="password"
+              value={ password }
+              onChange={ e => setPassword(e.target.value) }
+            />
+            <Button shadow color="primary"
+              type="submit"
+              disabled={ isLoading }
+              css={ { px: '$13', margin: '1rem auto 0 auto' } }
+              auto size="lg"
+            >
+              { isLoading && <SpinnerButtonLoading /> }
+              Iniciar sesión
+            </Button>
           </form>
-        </div>
-      </div>
-    </section>
+        </ContainerForm>
+      </Grid.Container>
+    </Container>
   );
 };
+
+const ContainerForm = styled(Grid)`
+  border-radius: 10px;
+  padding: 10px 15px;
+  background: #ECE9E6; 
+  background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6); 
+  background: linear-gradient(to right, #FFFFFF, #ECE9E6); 
+`;
 
 export default Login;
