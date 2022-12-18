@@ -1,3 +1,4 @@
+import { Text } from '@nextui-org/react';
 import {BrowserRouter, Switch} from 'react-router-dom';
 
 import PrivateRouter from '../components/router/PrivateRouter';
@@ -10,7 +11,16 @@ const Home = () => {
   return (
     <div>
       <BrowserRouter>
-        <h1 style={ {color: 'deeppink'} }>PetGram</h1>
+        <Text
+          h1
+          size={ 60 }
+          css={ {
+            textGradient: '45deg, $blue600 -20%, $pink600 50%'
+          } }
+          weight="bold"
+        >
+          Petgram
+        </Text>
         <NavigationPosts />
         <Switch>
           <PrivateRouter path="/home">
