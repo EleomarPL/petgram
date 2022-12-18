@@ -1,3 +1,4 @@
+import { Avatar } from '@nextui-org/react';
 import {NavLink} from 'react-router-dom';
 
 import '../../styles/navigationPosts.css';
@@ -17,24 +18,14 @@ const NavigationPosts = () => {
           <div key={ nav.nameImage }
             className="container-card-pet"
           >
-            <NavLink to={ `/home${nav.link}` }
-              className="header-post"
-              activeClassName="active-header-post"
+            <Avatar
+              size="xl"
+              src={ require(`../../img/posts/${nav.nameImage}.jpg`).default }
+              zoomed as={ NavLink }
               exact={ index === 0 }
-            >
-              <picture>
-                <source srcSet={ require(`../../img/posts/${nav.nameImage}.webp`).default } />
-                <img src={ require(`../../img/posts/${nav.nameImage}.jpg`).default }
-                  style={ {
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    overflow: 'hidden',
-                    borderRadius: '50%'
-                  } }
-                />
-              </picture>
-            </NavLink>
+              activeClassName="active-header-post"
+              to={ `/home${nav.link}` }
+            />
           </div>
         )
         }
