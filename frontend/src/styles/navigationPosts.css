@@ -18,12 +18,4 @@
 }
 .container-card-pet{
   margin-right: 1rem;
-  width: 5rem;
-  height: 5rem;
-}
-@media screen and (max-width: 600px){
-  .container-card-pet{
-    width: 3rem;
-    height: 3rem;
-  } 
 }

@@ -1,10 +1,11 @@
 import { useContext } from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { Button, Container, Navbar } from '@nextui-org/react';
+import styled from 'styled-components';
 
 import AuthContext from '../contexts/Auth';
-import useLogin from '../hooks/useLogin';
-
 import '../styles/header.css';
+import OptionsUser from './views/OptionsUser';
 
 const Header = () => {
   const {userData} = useContext(AuthContext);
@@ -16,94 +17,114 @@ const Header = () => {
 };
 
 const PrivateHeader = () => {
-  const {logout} = useLogin();
-
   return (
-    <nav className="navbar-user">
-      <ul className="d-flex justify-content-around align-items-center">
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/home"
+    <NavPrivate>
+      <Container
+        css={ {display: 'flex', justifyContent: 'center'} }
+      >
+        <Button.Group color="primary" bordered
+          size="lg"
+        >
+          <Button color="primary" auto
+            ghost as={ NavLink }
             activeClassName="active-header"
+            to="/home"
           >
-            <span className="visually-hidden-focusable">Home</span>
             <i className="bi bi-house-door-fill"></i>
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink className="nav-link" to="/favorites"
+          </Button>
+          <Button color="primary" auto
+            ghost as={ NavLink }
             activeClassName="active-header"
+            to="/favorites"
           >
-            <span className="visually-hidden-focusable">Favorites</span>
             <i className="bi bi-heart-fill"></i>
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <div className="btn-group dropup">
-            <button type="button" className="dropdown-toggle"
-              data-bs-toggle="dropdown" aria-expanded="false"
-              id="dropdownMenuClickableInside" data-bs-auto-close="outside"
-              style={ {backgroundColor: 'transparent', border: 'none'} }
-            >
-              <i className="bi bi-person-circle" style={ {fontSize: '1.5rem'} }></i>
-              <span className="visually-hidden-focusable">User</span>
-            </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
-              <li className="d-flex justify-content-center mt-2">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={ logout }
-                >
-                  Cerrar sesión
-                </button>
-              </li>
-              <li><hr className="dropdown-divider" /></li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-    </nav>
+          </Button>
+          <OptionsUser />
+        </Button.Group>
+      </Container>
+    </NavPrivate>
   );
 };
+
+const NavPrivate = styled.nav`
+  position: fixed;
+  left: 0; 
+  right: 0;
+  bottom: 0;
+  margin-left: auto; 
+  margin-right: auto;
+  
+  background-color: #fff;
+  border-radius: 10px 10px 0 0;
+  width: 80%;
+  z-index: 1;
+`;
 
 const PublicHeader = () => {
+  const collapseItems = [
+    { text: 'Inicio', href: '/' },
+    { text: 'Registrarse', href: '/register' },
+    { text: 'Iniciar sesión', href: '/login' }
+  ];
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light sticky-top"
-      style={ {borderBottom: '1px solid #C7C7C7'} }
+    <Navbar isBordered variant="sticky"
+      isCompact
     >
-      <div className="container-fluid">
-        <NavLink className="navbar-brand" to="/"
+      <Navbar.Toggle showIn="xs" />
+      <Navbar.Brand>
+        <NavLink to="/"
           style={ {color: 'deeppink'} }
         >
-          <strong>PetGram</strong>
+          <TitleHeader>PetGram</TitleHeader>
         </NavLink>
-        <button className="navbar-toggler" type="button"
-          data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mb-2 mb-lg-0" style={ {marginLeft: 'auto'} }>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/register"
-                activeClassName="active-header"
+      </Navbar.Brand>
+      <Navbar.Content enableCursorHighlight hideIn="xs"
+        variant="highlight"
+      >
+        <Navbar.Link as={ NavLink } to="/"
+          activeClassName="active-header" exact
+        >
+          Inicio
+        </Navbar.Link>
+        <Navbar.Link as={ NavLink } to="/register"
+          activeClassName="active-header"
+        >
+          Registrarse
+        </Navbar.Link>
+        <Navbar.Link to="/login"
+          as={ NavLink }
+          activeClassName="active-header"
+        >
+          Iniciar Sesión
+        </Navbar.Link>
+      </Navbar.Content>
+      <Navbar.Collapse disableAnimation>
+        { collapseItems &&
+          collapseItems.map((item) =>
+            <Navbar.CollapseItem
+              key={ item.href }
+              activeColor="warning"
+            >
+              <NavLink to={ item?.href }
+                activeClassName="active-header" exact
+                style={ {
+                  minWidth: '100%',
+                  padding: '10px 0'
+                } }
               >
-                Registrarse
+                { item.text }
               </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/login"
-                activeClassName="active-header"
-              >
-                Iniciar Sesión
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+            </Navbar.CollapseItem>
+          )
+        }
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
+
+const TitleHeader = styled.strong`
+  font-size: 1.5rem;
+`;
 
 export default Header;
