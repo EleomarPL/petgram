@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import {useHistory} from 'react-router-dom';
+import { Button, Container, Grid, Input, Text } from '@nextui-org/react';
+import styled from 'styled-components';
 
 import SpinnerButtonLoading from '../components/common/SpinnerButtonLoading';
 import { notifyWarning } from '../const/notifications';
@@ -7,6 +9,7 @@ import { isObjectValuesNull, isValidateEmail, validateLength } from '../services
 import useUser from '../hooks/useUser';
 
 import '../styles/register.css';
+import ComponentGrouper from '../components/common/ComponentGrouper';
 
 const Register = () => {
   const [password, setPassword] = useState('');
@@ -101,93 +104,103 @@ const Register = () => {
     }
   };
   return (
-    <section className="container-register">
-      <div className="img-left">
-        <picture>
-          <source srcSet={ require('../img/register.webp').default } />
-          <img src={ require('../img/register.png').default }
-            style={ {height: '15rem'} }
-          />
-        </picture>
-      </div>
-      <div className="container-inputs-register">
-        <form onSubmit={ handleRegister }>
-          <div className="pt-4">
-            <label htmlFor="name" className="visually-hidden-focusable">Nombre</label>
-            <input type="text"
-              id="name" className="form-control mt-2"
-              placeholder="Nombre"
-              required autoFocus
-            />
-          </div>
-          <div className="w-100 d-flex flex-wrap">
-            <div className="mt-4 px-0 col-lg-6 pr-lg-1">
-              <label htmlFor="pa_lastname" className="visually-hidden-focusable">Apellido paterno</label>
-              <input type="text"
-                id="pa_lastname" className="form-control"
-                placeholder="Apellido paterno" required
+    <Container>
+      <Text
+        h1
+        size={ 39 }
+        css={ {
+          textGradient: '45deg, $yellow600 -20%, $red600 100%',
+          textAlign: 'center'
+        } }
+        weight="bold"
+      >
+        Registrate
+      </Text>
+      <Grid.Container
+        justify="space-evenly"
+        css={ {margin: '1rem 0'} }
+      >
+        <Grid css={ { margin: 'auto' } }>
+          <div>
+            <picture>
+              <source srcSet={ require('../img/register.webp').default } />
+              <img src={ require('../img/register.png').default }
+                style={ {height: '15rem'} }
               />
-            </div>
-            <div className="mt-4 px-0 col-lg-6 pl-lg-1">
-              <label htmlFor="mo_lastname" className="visually-hidden-focusable">Apellido materno</label>
-              <input type="text"
-                id="mo_lastname" className="form-control"
-                placeholder="Apellido materno" required
-              />
-            </div>
+            </picture>
           </div>
-          <div className="mt-4">
-            <label htmlFor="email" className="visually-hidden-focusable">Email</label>
-            <input type="email"
-              id="email" className="form-control"
-              placeholder="Correo Electronico" required
-            />
-          </div>
-          <div className="mt-4">
-            <label htmlFor="user" className="visually-hidden-focusable">Usuario</label>
-            <input type="text"
-              id="user" className="form-control"
-              placeholder="Usuario" required
-            />
-          </div>
-          <div className="mt-4">
-            <label htmlFor="password" className="visually-hidden-focusable">Contraseña</label>
-            <div className="d-flex flex-column flex-sm-row">
-              <input id="password" value={ password }
-                type="password" className="form-control mr-sm-1 mr-md-2"
-                placeholder="Contraseña" required
-                onChange={ (evt) => verifyPasswordChange(evt, setPassword, 0) }
-              />
-            </div>
-          </div>
-          <div id="box-confirmpass" className="mt-4">
-            <label htmlFor="confirmpassword" className="visually-hidden-focusable">Confirmar constraseña</label>
-            <div className="d-flex flex-column flex-sm-row">
-              <input type="password" id="confirmpassword"
-                value={ confirmPassword }
-                className="form-control mr-sm-1 mr-md-2" placeholder="Confirmar contraseña"
-                onChange={ (evt) => verifyPasswordChange(evt, setConfirmPassword, 1) }
+        </Grid>
+        <ContainerForm xs>
+          <form onSubmit={ handleRegister }
+            style={ {width: '100%'} }
+          >
+            <ComponentGrouper>
+              <Input label="Nombre" placeholder="Ingresa tu nombre"
+                bordered fullWidth
                 required
               />
-            </div>
-          </div>
-          <small style={ {fontWeight: '600', color: messageStatusPassword.color} }>
-            { messageStatusPassword.text }
-          </small>
-          <div className="mt-4">
-            <button type="submit" className="btn btn-lg btn-primary d-block px-4 mx-auto button-media"
-              disabled={ isLoading }
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <Input label="Apellido paterno" placeholder="Ingresa tu apellido paterno"
+                bordered fullWidth
+                required
+              />
+              <Input label="Apellido materno" placeholder="Ingresa tu apellido materno"
+                bordered fullWidth
+                required
+              />
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <Input label="Correo electronico" placeholder="Ingresa tu correo electronico"
+                bordered fullWidth
+                type="email" required
+              />
+              <Input label="Usuario" placeholder="Ingresa tu usuario"
+                bordered fullWidth
+                required
+              />
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <Input label="Contraseña" placeholder="Ingresa tu contraseña"
+                bordered fullWidth
+                required type="password"
+                onChange={ (evt) => verifyPasswordChange(evt, setPassword, 0) }
+                value={ password }
+              />
+              <Input label="Confirmar contraseña" placeholder="Confirma tu contraseña"
+                bordered fullWidth
+                required type="password"
+                onChange={ (evt) => verifyPasswordChange(evt, setConfirmPassword, 1) }
+                value={ confirmPassword }
+              />
+            </ComponentGrouper>
+            <Text color={ messageStatusPassword.color }
+              weight="bold" css={ {textAlign: 'center'} }
             >
-              { isLoading &&
-                <SpinnerButtonLoading />
-              }
+              { messageStatusPassword.text }
+            </Text>
+            <Button shadow color="primary"
+              type="submit"
+              disabled={ isLoading }
+              css={ { px: '$13', margin: '1rem auto 0 auto' } }
+              auto size="lg"
+            >
+              { isLoading && <SpinnerButtonLoading /> }
               Registrarme
-            </button>
-          </div>
-        </form>
-      </div>
-    </section>
+            </Button>
+          </form>
+        </ContainerForm>
+      </Grid.Container>
+    </Container>
   );
 };
+
+const ContainerForm = styled(Grid)`
+  border-radius: 10px;
+  padding: 10px 15px;
+  background: #ECE9E6; 
+  background: -webkit-linear-gradient(to right, #FFFFFF, #ECE9E6); 
+  background: linear-gradient(to right, #FFFFFF, #ECE9E6); 
+`;
 
 export default Register;
